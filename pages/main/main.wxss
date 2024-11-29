@@ -1,0 +1,98 @@
+/* pages/main/main.wxss */
+
+.usersCard {
+  position: relative;
+  z-index: 2;
+  margin-top: -10rpx;
+  width: 688rpx; 
+  height: 150rpx; 
+  border-radius: 16rpx;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: 0px 0.25px 6px 2px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.usersCard .pic-icon image {
+  margin-top:8px;
+  margin-left:2px;
+  border-style: solid;
+  border-width: 0.5px;
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.usersCard .userCardDetail .nameTitle{
+  margin-left: 5px;
+  font-weight: bold;
+}
+.usersCard .userCardDetail .credit-box{
+  margin-top: 5px;
+  margin-left:5px;
+}
+
+.creditboxBar {
+  margin-top: 7px;
+  margin-left:2px;
+  position: relative;
+  width: 100%;
+  height: 10rpx; 
+  background-color: #e0e0e0; 
+  border-radius: 5rpx; 
+  overflow: hidden; 
+}
+
+.creditboxBar .progress {
+  height: 100%; 
+  background-color: #b81414; 
+  transition: width 0.3s ease; 
+}
+
+.DirectionBox {
+  position: relative;
+  z-index: 2;
+  margin-top: 30rpx;
+  width: 688rpx; 
+  height: 750rpx; 
+  border-radius: 16rpx;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: 0px 0.25px 6px 2px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.DirectionBox .toSendOrder, .DirectionBox .toTakeOrder {
+  position: relative;
+  width: 344rpx; 
+  height: 100%; 
+  background-color: #fff;
+  overflow: hidden;
+  margin-left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.DirectionBox .backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* 使背景图在下层 */
+}
+
+.DirectionBox .title {
+  position: relative;
+  margin-bottom:600rpx;
+  color: rgb(248, 22, 6); /* 字体颜色 */
+  font-size: 50rpx; /* 字体大小 */
+  font-weight: bold;
+  z-index: 2; /* 使标题在上层 */
+}

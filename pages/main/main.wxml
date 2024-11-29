@@ -1,0 +1,45 @@
+<!--pages/main/main.wxml-->
+<!-- 顶部轮播图 -->
+<view style="width:100%;height:500rpx;">
+  <swiper autoplay="true" style="width:100%; height:500rpx;">
+    <swiper-item wx:for="{{swiperImage}}" wx:key="index">
+      <image bindtap="redirectToUrl" data-index="{{index}}" style="width:100%;height:500rpx;" src="{{item.imageUrl}}" />
+    </swiper-item>
+  </swiper>
+</view>
+
+<!-- 个人卡片 -->
+<view class="usersCard" bindtap="navigateToMine">
+  <!-- 头像 -->
+  <view class="pic-icon">
+    <image src="/images/pic-icon.png" mode=""/>
+  </view>
+  <!-- 用户卡片细节 -->
+  <view class="userCardDetail">
+    <!-- 卡片名称 -->
+    <text class="nameTitle">username</text>
+
+    <!-- 积分 -->
+    <view class="credit-box">
+      <text>您的信誉积分值为：<text style="font-weight: bolder;">{{creditScore}}</text></text>
+      <view class="creditboxBar" >
+        <view class="progress" style="width:{{creditScore}}% "></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="DirectionBox">
+  <view class="toSendOrder" bindtap="navigateToSendOrder">
+    <image class="backgroundImage" src="/images/send-order-bg.jpg" mode="aspectFill"/>
+    <text class="title">发一单</text>
+  </view>
+
+  <view class="toTakeOrder" bindtap="navigateToTakeOrder">
+    <image class="backgroundImage" src="/images/take-order-bg.jpg" mode="aspectFill"/>
+    <text class="title">接一单</text>
+  </view>
+</view>
+
+
+

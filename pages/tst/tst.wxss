@@ -1,0 +1,13 @@
+/* pages/tst/tst.wxss */
+.test-div{
+  text-align: center;
+  background-color: aqua;
+  height:100rpx;
+  width: 750rpx;
+}
+.test-text{
+  text-align: center;
+}
+.test_input{
+  position: relative;
+}

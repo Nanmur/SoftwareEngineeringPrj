@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="form">
+    <text class="label">账号</text>
+    <input class="input" type="text" placeholder="请输入您的账号" bindinput="onAccountInput" />
+
+    <text class="label">密码</text>
+    <input class="input" type="password" placeholder="请输入您的密码" bindinput="onPasswordInput" />
+
+    <button class="btn" bindtap="onLogin">登录</button>
+    <button class="btn" bindtap="goToRegister">注册</button>
+  </view>
+</view>
