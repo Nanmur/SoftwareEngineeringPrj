@@ -57,7 +57,7 @@ Page({
   },
 
   // 跳转到注册页面
-  onRegister() {
+  goToRegister() {
     wx.navigateTo({ url: '/pages/register/register' });
   }
 });
