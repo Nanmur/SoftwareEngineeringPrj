@@ -5,7 +5,7 @@ const app = getApp();
 async function request(url, data) {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `https://light-basically-fox.ngrok-free.app${url}`,
+      url: `https://above-cat-presumably.ngrok-free.app${url}`,
       method: 'POST',
       data: data,
       header: { 'Content-Type': 'application/json' },
