@@ -64,7 +64,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    console.log(app.globalData.userInfo.account);
+    this.setData({
+      name:app.globalData.userInfo.account
+    });
+    console.log(this.data.name);
   },
 
   /**

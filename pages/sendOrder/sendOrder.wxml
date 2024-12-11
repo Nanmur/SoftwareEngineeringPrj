@@ -17,7 +17,7 @@
     
     <view class="image-section">
       <view class="image-picker">
-        <image src="/path/to/camera-icon.png" class="camera-icon" bindtap="chooseImage" />
+        <image src="/images/addpic.png" class="camera-icon" bindtap="chooseImage" />
         <text class="add-photo">增加图片</text>
       </view>
       <view class="image-preview">

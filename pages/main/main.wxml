@@ -17,7 +17,7 @@
   <!-- 用户卡片细节 -->
   <view class="userCardDetail">
     <!-- 卡片名称 -->
-    <text class="nameTitle">{{userInfo}}</text>
+    <text class="nameTitle">{{ name }}</text>
 
     <!-- 积分 -->
     <view class="credit-box">

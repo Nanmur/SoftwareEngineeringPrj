@@ -1,6 +1,6 @@
 Page({
   data: {
-    nicname:null,
+    name:null,
     phone_number:null,
     title: '', // 标题
     description: '', // 描述

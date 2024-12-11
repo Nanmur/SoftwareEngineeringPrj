@@ -42,10 +42,14 @@ Page({
       const response = await request('/login', { account, password });
       if (response.success) {
         // 存储用户信息到全局变量和本地存储
-        const userInfo = response.data.data; // 假设后端返回的用户信息在 data 中
+        const userInfo = ({
+          user_id:response.data.user_id,
+          account:response.data.account,
+          phone:response.data.phone
+        });
         app.globalData.userInfo = userInfo; // 保存到全局变量
         wx.setStorageSync('userInfo', userInfo); // 保存到本地存储
-
+        console.log(userInfo);
         wx.showToast({ title: '登录成功', icon: 'success' });
         wx.switchTab({ url: '/pages/main/main' }); // 登录后跳转到首页
       } else {
