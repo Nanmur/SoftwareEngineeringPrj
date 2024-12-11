@@ -6,7 +6,7 @@
     <text class="default-address">(默认地址)</text>
     <navigator class="address-arrow" url="/path/to/address-selection"> &gt; </navigator>
     <view class="user-info">
-      <text class="username">{{nicname}}</text>
+      <text class="username">{{name}}</text>
       <text class="phone">{{phone_number}}</text>
     </view>
   </view>

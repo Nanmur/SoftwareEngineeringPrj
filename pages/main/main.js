@@ -51,13 +51,13 @@ Page({
 
   navigateToSendOrder: function() {
     wx.navigateTo({
-      url: '/pages/sendOrder/sendOrder' // *增加对应页面
+      url: '/pages/sendOrder/sendOrder' 
     });
   },
 
   navigateToTakeOrder: function() {
     wx.navigateTo({
-      url: '/pages/takeOrder/takeOrder' // *增加对应页面
+      url: '/pages/takeOrder/takeOrder' 
     });
   },
   /**
