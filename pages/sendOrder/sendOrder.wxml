@@ -4,13 +4,9 @@
     <text class="default-address">(默认地址)</text>
     <navigator class="address-arrow" url="/path/to/address-selection"> &gt; </navigator>
     <view class="user-info">
-<<<<<<< HEAD
       <text class="username">{{nicname || '未登录'}}</text>
       <text class="phone">{{phone_number || '暂无手机号'}}</text>
-=======
-      <text class="username">{{name}}</text>
-      <text class="phone">{{phone_number}}</text>
->>>>>>> 97f0ac259dcb37a25d135b5a5362b53c8f49f8a0
+
     </view>
     <text class="address-detail">{{address || '未设置默认地址'}}</text>
   </view>
