@@ -42,7 +42,6 @@ Page({
       const response = await request('/login', { account, password });
       if (response.success) {
         // 存储用户信息到全局变量和本地存储
-<<<<<<< HEAD
         console.log(response);
         const userInfo = ({user_id:response.data.user_id,account:response.data.account,password:response.data.password,reg_time:response.data.reg_time,phone:response.data.phone,is_runner:response.data.is_runner,credit_score:response.data.credit_score,wx_id:response.data.wx_id,completed_orders:response.data.completed_orders,rating_requester:response.data.rating_requester,rating_runner:response.data.rating_runner}); // 假设后端返回的用户信息在 data 中
         app.globalData.userInfo = userInfo; // 保存到全局变量

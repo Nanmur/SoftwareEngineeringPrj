@@ -1,2 +1,54 @@
-<!--pages/myaddress/myaddress.wxml-->
-<text>pages/myaddress/myaddress.wxml</text>
+<view class="container">
+  <!-- 选择模式 -->
+  <view wx:if="{{mode === 'select'}}">
+    <text class="page-title">选择收货地址</text>
+    <block wx:if="{{addressList.length > 0}}">
+      <view wx:for="{{addressList}}" wx:key="address_id" class="address-item" bindtap="selectAddress">
+        <text class="address-detail">{{item.detail}}</text>
+        <text class="default-label" wx:if="{{item.is_default}}">(默认地址)</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="empty-state">
+        <text>当前没有可用地址</text>
+        <button class="add-btn" bindtap="showAddAddressModal">添加新地址</button>
+      </view>
+    </block>
+  </view>
+
+  <!-- 管理模式 -->
+  <view wx:if="{{mode === 'manage'}}">
+    <text class="page-title">我的地址管理</text>
+    <block wx:if="{{addressList.length > 0}}">
+      <view wx:for="{{addressList}}" wx:key="address_id" class="address-item">
+        <view class="address-detail">
+          <text>{{item.detail}}</text>
+          <text class="default-label" wx:if="{{item.is_default}}">(默认地址)</text>
+        </view>
+        <button class="set-default-btn" bindtap="setDefault" data-id="{{item.address_id}}">设为默认</button>
+        <button class="delete-btn" bindtap="deleteAddress" data-id="{{item.address_id}}">删除</button>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="empty-state">
+        <text>您还没有添加任何地址</text>
+      </view>
+    </block>
+    <button class="add-btn" bindtap="showAddAddressModal">添加新地址</button>
+  </view>
+
+  <!-- 添加新地址弹窗 -->
+  <view class="modal">
+  <view class="modal-content">
+    <text class="modal-title">添加新地址</text>
+    <input class="modal-input" placeholder="请输入地址详情" bindinput="onInputChange" data-field="newAddressDetail" />
+    <checkbox-group class="modal-checkbox-group">
+      <checkbox class="modal-checkbox" value="isDefault" bindchange="onDefaultChange">设为默认地址</checkbox>
+    </checkbox-group>
+    <view class="modal-actions">
+      <button class="confirm-btn" bindtap="confirmAddAddress">确认</button>
+      <button class="cancel-btn" bindtap="hideAddAddressModal">取消</button>
+    </view>
+  </view>
+</view>
+</view>

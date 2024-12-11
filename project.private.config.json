@@ -9,6 +9,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "测试页面",
+          "pathName": "pages/tst/tst",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "我的地址",
           "pathName": "pages/myaddress/myaddress",
           "query": "",

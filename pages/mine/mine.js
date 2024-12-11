@@ -14,7 +14,7 @@ Page({
    */
   onLoad(options) {
     this.setData({
-      name:app.globalData.userInfo.account
+      name: app.globalData.userInfo.account // 获取用户的账户名
     });
   },
 
@@ -66,9 +66,9 @@ Page({
   onShareAppMessage() {
 
   },
-  navigateTomyaddress: function(){
-    wx.redirectTo({
-      url: '/pages/myaddress/myaddress',
-    })
-  },
-})
+  navigateTomyaddress: function () {
+    wx.navigateTo({
+      url: '/pages/myaddress/myaddress?mode=manage', // 传递 mode 参数
+    });
+  }
+});
