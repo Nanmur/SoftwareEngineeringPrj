@@ -51,24 +51,31 @@ Page({
 
   navigateToSendOrder: function() {
     wx.navigateTo({
-      url: '/pages/sendOrder/sendOrder' // *增加对应页面
+      url: '/pages/sendOrder/sendOrder' 
     });
   },
 
   navigateToTakeOrder: function() {
     wx.navigateTo({
-      url: '/pages/takeOrder/takeOrder' // *增加对应页面
+      url: '/pages/takeOrder/takeOrder' 
     });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+<<<<<<< HEAD
+=======
+    console.log(app.globalData.userInfo.account);
+>>>>>>> 97f0ac259dcb37a25d135b5a5362b53c8f49f8a0
     this.setData({
       name:app.globalData.userInfo.account
     });
     console.log(this.data.name);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 97f0ac259dcb37a25d135b5a5362b53c8f49f8a0
   },
 
   /**

@@ -1,0 +1,63 @@
+create database jindouyun
+use jindouyun
+
+-- users table
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT, -- 用户id
+    account VARCHAR(255) NOT NULL,          -- 账户
+    password VARCHAR(255) NOT NULL,         -- 密码
+    reg_time DATETIME NOT NULL,             -- 注册时间
+    phone VARCHAR(20) NOT NULL,             -- 联系电话
+    is_runner BOOLEAN NOT NULL DEFAULT FALSE, -- 是否具有跑腿者资格
+    credit_score INT NOT NULL DEFAULT 0,    -- 信誉值
+    wx_id VARCHAR(255),                     -- 绑定的微信号
+    completed_orders INT NOT NULL DEFAULT 0, -- 已经完成的单数
+    rating_requester FLOAT NOT NULL DEFAULT 0, -- (请求者) 好评率
+    rating_runner FLOAT NOT NULL DEFAULT 0    -- (跑腿者) 好评率
+);
+
+-- address table
+CREATE TABLE address (
+    address_id INT PRIMARY KEY AUTO_INCREMENT, -- 地址id
+    user_id INT NOT NULL,                      -- 用户id
+    is_default BOOLEAN NOT NULL DEFAULT FALSE, -- 是否是默认地址
+    detail VARCHAR(500) NOT NULL,              -- 详细地址
+    FOREIGN KEY (user_id) REFERENCES users(user_id) -- 外键：用户id
+);
+
+-- region table
+CREATE TABLE region (
+    region_id INT PRIMARY KEY AUTO_INCREMENT, -- 区域id
+    region_detail VARCHAR(255) NOT NULL,      -- 区域详情
+    address_id INT NOT NULL,                  -- 地址id
+    FOREIGN KEY (address_id) REFERENCES address(address_id) -- 外键：地址id
+);
+
+-- orders table
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,   -- 订单id
+    requester_id INT NOT NULL,                 -- 请求者id
+    target_address_id INT NOT NULL,            -- 订单目标地址id
+    title VARCHAR(255) NOT NULL,               -- 订单标题
+    description TEXT,                          -- 订单详情描述
+    img_url VARCHAR(500),                      -- 描述图片
+    reward DECIMAL(10, 2) NOT NULL,            -- 报酬
+    deadline DATETIME NOT NULL,                -- 时限
+    status VARCHAR(50) NOT NULL,               -- 订单状态
+    runner_id INT,                             -- 跑腿者id
+    rating_requester FLOAT DEFAULT 0,          -- (请求者) 好评率
+    rating_runner FLOAT DEFAULT 0,             -- (跑腿者) 好评率
+    FOREIGN KEY (requester_id) REFERENCES users(user_id), -- 外键：请求者id
+    FOREIGN KEY (target_address_id) REFERENCES address(address_id), -- 外键：目标地址id
+    FOREIGN KEY (runner_id) REFERENCES users(user_id) -- 外键：跑腿者id
+);
+
+-- payment table
+CREATE TABLE payment (
+    payment_id INT PRIMARY KEY AUTO_INCREMENT, -- 支付id
+    order_id INT NOT NULL,                     -- 订单id
+    amount DECIMAL(10, 2) NOT NULL,            -- 支付金额
+    status VARCHAR(50) NOT NULL,               -- 支付状态
+    pay_time DATETIME NOT NULL,                -- 支付时间
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) -- 外键：订单id
+);

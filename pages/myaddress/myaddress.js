@@ -1,21 +1,18 @@
-// pages/mine/mine.js
-const app=getApp();
+// pages/myaddress/myaddress.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name:""
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData({
-      name:app.globalData.userInfo.account
-    });
+
   },
 
   /**
@@ -65,10 +62,5 @@ Page({
    */
   onShareAppMessage() {
 
-  },
-  navigateTomyaddress: function(){
-    wx.redirectTo({
-      url: '/pages/myaddress/myaddress',
-    })
-  },
+  }
 })

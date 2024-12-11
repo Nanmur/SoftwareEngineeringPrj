@@ -42,11 +42,22 @@ Page({
       const response = await request('/login', { account, password });
       if (response.success) {
         // 存储用户信息到全局变量和本地存储
+<<<<<<< HEAD
         console.log(response);
         const userInfo = ({user_id:response.data.user_id,account:response.data.account,password:response.data.password,reg_time:response.data.reg_time,phone:response.data.phone,is_runner:response.data.is_runner,credit_score:response.data.credit_score,wx_id:response.data.wx_id,completed_orders:response.data.completed_orders,rating_requester:response.data.rating_requester,rating_runner:response.data.rating_runner}); // 假设后端返回的用户信息在 data 中
         app.globalData.userInfo = userInfo; // 保存到全局变量
         wx.setStorageSync('userInfo', userInfo); // 保存到本地存储
         
+=======
+        const userInfo = ({
+          user_id:response.data.user_id,
+          account:response.data.account,
+          phone:response.data.phone
+        });
+        app.globalData.userInfo = userInfo; // 保存到全局变量
+        wx.setStorageSync('userInfo', userInfo); // 保存到本地存储
+        console.log(userInfo);
+>>>>>>> 97f0ac259dcb37a25d135b5a5362b53c8f49f8a0
         wx.showToast({ title: '登录成功', icon: 'success' });
         wx.switchTab({ url: '/pages/main/main' }); // 登录后跳转到首页
         console.log('当前登录的用户信息:', userInfo);

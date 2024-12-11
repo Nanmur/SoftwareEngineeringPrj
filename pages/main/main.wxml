@@ -17,7 +17,11 @@
   <!-- 用户卡片细节 -->
   <view class="userCardDetail">
     <!-- 卡片名称 -->
+<<<<<<< HEAD
     <text class="nameTitle">{{name}}</text>
+=======
+    <text class="nameTitle">{{ name }}</text>
+>>>>>>> 97f0ac259dcb37a25d135b5a5362b53c8f49f8a0
 
     <!-- 积分 -->
     <view class="credit-box">

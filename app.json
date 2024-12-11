@@ -7,7 +7,8 @@
     "pages/logs/logs",
     "pages/order/order",
     "pages/sendOrder/sendOrder",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/myaddress/myaddress"
   ],
   "window": {
     "navigationBarTextStyle": "white",

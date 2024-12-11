@@ -1,11 +1,19 @@
 Page({
   data: {
+<<<<<<< HEAD
     nicname: null, // 用户名
     phone_number: null, // 手机号
     address: '', // 默认收货地址
     title: '', // 订单标题
     description: '', // 订单描述
     reward: '', // 报酬
+=======
+    name:null,
+    phone_number:null,
+    title: '', // 标题
+    description: '', // 描述
+    reward: '', // 奖励
+>>>>>>> 97f0ac259dcb37a25d135b5a5362b53c8f49f8a0
     timeLimit: '', // 时间限制
     images: [], // 图片列表
     paymentMethods: ["微信支付"], // 支付方式
