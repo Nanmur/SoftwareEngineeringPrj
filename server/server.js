@@ -52,6 +52,32 @@ app.post('/wxlogin', async (req, res) => {
   }
   res.json({ success: true, data: user[0] });
 });
+//获取用户地址的API
+app.post('/getDefaultAddress', async (req, res) => {
+  const { userId } = req.body;
+
+  if (!userId) {
+    return res.json({ success: false, message: 'User ID is required' });
+  }
+
+  try {
+    const result = await query(
+      `SELECT a.address_id, a.detail, u.phone 
+       FROM address a 
+       JOIN users u ON a.user_id = u.user_id 
+       WHERE a.user_id = ? AND a.is_default = TRUE`,
+      [userId]
+    );
+    if (result.length > 0) {
+      res.json({ success: true, data: result[0] });
+    } else {
+      res.json({ success: false, message: 'No default address found' });
+    }
+  } catch (error) {
+    console.error('Error fetching default address:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
 
 // Start server
 app.listen(3000, () => {

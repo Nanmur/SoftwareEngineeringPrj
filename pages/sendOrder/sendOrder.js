@@ -1,14 +1,70 @@
 Page({
   data: {
-    nicname:null,
-    phone_number:null,
-    title: '', // 标题
-    description: '', // 描述
-    reward: '', // 奖励
+    nicname: null, // 用户名
+    phone_number: null, // 手机号
+    address: '', // 默认收货地址
+    title: '', // 订单标题
+    description: '', // 订单描述
+    reward: '', // 报酬
     timeLimit: '', // 时间限制
-    images: [], // 上传的图片列表
+    images: [], // 图片列表
     paymentMethods: ["微信支付"], // 支付方式
     selectedPaymentMethod: "微信支付", // 默认支付方式
+  },
+
+  onLoad: function () {
+    this.getUserInfoAndAddress();
+  },
+
+  // 获取用户信息和默认地址
+  getUserInfoAndAddress: function () {
+    const userInfo = wx.getStorageSync('userInfo'); // 获取存储的用户信息
+
+    if (!userInfo || !userInfo.user_id) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000,
+      });
+      return;
+    }
+
+    // 设置用户基本信息
+    this.setData({
+      nicname: userInfo.account,
+      phone_number: userInfo.phone,
+    });
+
+    // 请求默认地址
+    wx.request({
+      url: 'https://above-cat-presumably.ngrok-free.app/getDefaultAddress', // 替换为你的后端地址
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+      },
+      data: { userId: userInfo.user_id }, // 使用 user_id 作为查询参数
+      success: (res) => {
+        if (res.data.success) {
+          const { detail } = res.data.data;
+          this.setData({
+            address: detail,
+          });
+        } else {
+          wx.showToast({
+            title: res.data.message || '获取地址失败',
+            icon: 'error',
+            duration: 2000,
+          });
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '无法连接到服务器',
+          icon: 'error',
+          duration: 2000,
+        });
+      },
+    });
   },
 
   // 选择图片
@@ -45,7 +101,6 @@ Page({
   confirmOrder: function () {
     const { title, description, reward, timeLimit, images } = this.data;
 
-    // 验证必填字段
     if (!title || !description || !reward || !timeLimit) {
       wx.showToast({
         title: '请填写完整信息',
@@ -55,9 +110,8 @@ Page({
       return;
     }
 
-    // 发起 POST 请求到服务器
     wx.request({
-      url: 'https://127.0.0.1：3000/create-order', // 替换为你的 ngrok 地址
+      url: 'https://above-cat-presumably.ngrok-free.app/create-order', // 替换为你的后端地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',

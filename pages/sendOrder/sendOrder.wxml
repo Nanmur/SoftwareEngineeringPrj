@@ -1,14 +1,13 @@
 <view class="container">
-
-
   <view class="address-section">
     <text class="address-label">收货地址</text>
     <text class="default-address">(默认地址)</text>
     <navigator class="address-arrow" url="/path/to/address-selection"> &gt; </navigator>
     <view class="user-info">
-      <text class="username">{{nicname}}</text>
-      <text class="phone">{{phone_number}}</text>
+      <text class="username">{{nicname || '未登录'}}</text>
+      <text class="phone">{{phone_number || '暂无手机号'}}</text>
     </view>
+    <text class="address-detail">{{address || '未设置默认地址'}}</text>
   </view>
 
   <view class="order-content">
