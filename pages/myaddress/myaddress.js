@@ -4,7 +4,7 @@ Page({
     addressList: [], // 地址列表
     showModal: false, // 控制添加地址弹窗显示
     newAddressDetail: '', // 新地址详情
-    isDefault: false, // 是否设为默认地址
+    isDefault: true, // 是否设为默认地址
   },
 
   onLoad: function (options) {
@@ -26,7 +26,7 @@ Page({
     }
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/getAddresses', // 替换为ngrok地址
+      url: 'https://light-basically-fox.ngrok-free.app/getAddresses', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -73,6 +73,8 @@ Page({
 
   // 处理默认地址选择
   onDefaultChange: function (e) {
+    // console.log(e);
+    console.log(e.detail.value);
     this.setData({ isDefault: e.detail.value.length > 0 });
   },
 
@@ -90,7 +92,7 @@ Page({
     }
   
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/addAddress', // 替换为ngrok地址
+      url: 'https://light-basically-fox.ngrok-free.app/addAddress', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -124,7 +126,7 @@ Page({
     const userInfo = wx.getStorageSync('userInfo');
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/setDefaultAddress', // 替换为ngrok地址
+      url: 'https://light-basically-fox.ngrok-free.app/setDefaultAddress', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -156,7 +158,7 @@ Page({
     const userInfo = wx.getStorageSync('userInfo');
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/deleteAddress', // 替换为ngrok地址
+      url: 'https://light-basically-fox.ngrok-free.app/deleteAddress', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',

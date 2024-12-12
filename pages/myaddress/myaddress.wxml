@@ -7,6 +7,7 @@
         <text class="address-detail">{{item.detail}}</text>
         <text class="default-label" wx:if="{{item.is_default}}">(默认地址)</text>
       </view>
+      <button class="add-btn" bindtap="showAddAddressModal">添加新地址</button>
     </block>
     <block wx:else>
       <view class="empty-state">
@@ -42,8 +43,8 @@
     <view class="modal-content">
       <text class="modal-title">添加新地址</text>
       <input class="modal-input" placeholder="请输入地址详情" bindinput="onInputChange" data-field="newAddressDetail" />
-      <checkbox-group class="modal-checkbox-group">
-        <checkbox class="modal-checkbox" value="isDefault" bindchange="onDefaultChange">设为默认地址</checkbox>
+      <checkbox-group class="modal-checkbox-group" bindchange="onDefaultChange" >
+        <checkbox class="modal-checkbox" value="isDefault" checked="false">设为默认地址</checkbox>
       </checkbox-group>
       <view class="modal-actions">
         <button class="confirm-btn" bindtap="confirmAddAddress">确认</button>
