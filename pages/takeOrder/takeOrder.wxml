@@ -1,0 +1,26 @@
+<view class="container">
+  <block wx:if="{{orders.length > 0}}">
+    <!-- 当有订单时，显示订单列表 -->
+    <block wx:for="{{orders}}" wx:key="order_id">
+      <view class="order-item">
+        <view class="order-info">
+          <view class="order-title">{{item.title}}</view>
+          <view class="order-desc">描述：{{item.description}}</view>
+          <view class="order-reward">报酬：{{item.reward}}元</view>
+          <view class="order-deadline">截止时间：{{item.deadline}}</view>
+        </view>
+        <view class="order-actions">
+          <button bindtap="onTakeOrder" data-id="{{item.order_id}}">接单</button>
+        </view>
+      </view>
+    </block>
+  </block>
+  
+  <block wx:else>
+    <!-- 当没有订单时，显示提示信息 -->
+    <view class="empty-container">
+      <image class="empty-image" src="/images/no-orders.png"></image>
+      <view class="empty-text">当前区域没有可接的订单</view>
+    </view>
+  </block>
+</view>

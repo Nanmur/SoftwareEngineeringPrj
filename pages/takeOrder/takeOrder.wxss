@@ -1,0 +1,62 @@
+.container {
+  padding: 10px;
+}
+
+.order-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.order-info {
+  flex: 1;
+}
+
+.order-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.order-desc,
+.order-reward,
+.order-deadline {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.order-actions {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+button {
+  background-color: #1aad19;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* 空状态样式 */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.empty-image {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.empty-text {
+  color: #999;
+  font-size: 16px;
+}
