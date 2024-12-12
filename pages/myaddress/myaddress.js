@@ -26,7 +26,7 @@ Page({
     }
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/getAddresses', 
+      url: 'https://above-cat-presumably.ngrok-free.app/getAddresses', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -57,7 +57,6 @@ Page({
 
   // 显示添加地址弹窗
   showAddAddressModal: function () {
-    console.log('显示添加地址弹窗');
     this.setData({ showModal: true });
   },
 
@@ -77,22 +76,21 @@ Page({
     this.setData({ isDefault: e.detail.value.length > 0 });
   },
 
-  // 确认添加地址
   confirmAddAddress: function () {
     const { newAddressDetail, isDefault } = this.data;
     const userInfo = wx.getStorageSync('userInfo');
-
+    
     if (!newAddressDetail) {
-      wx.showToast({
-        title: '请填写地址详情',
-        icon: 'error',
-        duration: 2000,
-      });
-      return;
+        wx.showToast({
+            title: '请填写地址详情',
+            icon: 'error',
+            duration: 2000,
+        });
+        return;
     }
-
+  
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/addAddress',
+      url: 'https://above-cat-presumably.ngrok-free.app/addAddress', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -105,13 +103,13 @@ Page({
       success: (res) => {
         if (res.data.success) {
           wx.showToast({ title: '地址添加成功', icon: 'success', duration: 2000 });
-          this.hideAddAddressModal();
           this.loadAddressList(); // 刷新地址列表
+          this.hideAddAddressModal(); // 隐藏弹窗
         } else {
           wx.showToast({ title: res.data.message || '添加失败', icon: 'error', duration: 2000 });
         }
       },
-      fail: () => {
+      fail: (err) => {
         wx.showToast({
           title: '无法连接服务器',
           icon: 'error',
@@ -121,13 +119,12 @@ Page({
     });
   },
 
-  // 设置默认地址
   setDefault: function (e) {
     const addressId = e.currentTarget.dataset.id;
     const userInfo = wx.getStorageSync('userInfo');
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/setDefaultAddress',
+      url: 'https://above-cat-presumably.ngrok-free.app/setDefaultAddress', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -144,7 +141,7 @@ Page({
           wx.showToast({ title: res.data.message || '设置失败', icon: 'error', duration: 2000 });
         }
       },
-      fail: () => {
+      fail: (err) => {
         wx.showToast({
           title: '无法连接服务器',
           icon: 'error',
@@ -153,4 +150,36 @@ Page({
       },
     });
   },
-});
+
+  deleteAddress: function (e) {
+    const addressId = e.currentTarget.dataset.id;
+    const userInfo = wx.getStorageSync('userInfo');
+
+    wx.request({
+      url: 'https://above-cat-presumably.ngrok-free.app/deleteAddress', // 替换为ngrok地址
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        userId: userInfo.user_id,
+        addressId,
+      },
+      success: (res) => {
+        if (res.data.success) {
+          wx.showToast({ title: '地址删除成功', icon: 'success', duration: 2000 });
+          this.loadAddressList(); // 刷新地址列表
+        } else {
+          wx.showToast({ title: res.data.message || '删除失败', icon: 'error', duration: 2000 });
+        }
+      },
+      fail: (err) => {
+        wx.showToast({
+          title: '无法连接服务器',
+          icon: 'error',
+          duration: 2000,
+        });
+      },
+    });
+  },
+})

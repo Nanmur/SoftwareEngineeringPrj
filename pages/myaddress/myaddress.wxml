@@ -38,17 +38,17 @@
   </view>
 
   <!-- 添加新地址弹窗 -->
-  <view class="modal">
-  <view class="modal-content">
-    <text class="modal-title">添加新地址</text>
-    <input class="modal-input" placeholder="请输入地址详情" bindinput="onInputChange" data-field="newAddressDetail" />
-    <checkbox-group class="modal-checkbox-group">
-      <checkbox class="modal-checkbox" value="isDefault" bindchange="onDefaultChange">设为默认地址</checkbox>
-    </checkbox-group>
-    <view class="modal-actions">
-      <button class="confirm-btn" bindtap="confirmAddAddress">确认</button>
-      <button class="cancel-btn" bindtap="hideAddAddressModal">取消</button>
+  <view class="modal {{showModal ? 'show' : ''}}">
+    <view class="modal-content">
+      <text class="modal-title">添加新地址</text>
+      <input class="modal-input" placeholder="请输入地址详情" bindinput="onInputChange" data-field="newAddressDetail" />
+      <checkbox-group class="modal-checkbox-group">
+        <checkbox class="modal-checkbox" value="isDefault" bindchange="onDefaultChange">设为默认地址</checkbox>
+      </checkbox-group>
+      <view class="modal-actions">
+        <button class="confirm-btn" bindtap="confirmAddAddress">确认</button>
+        <button class="cancel-btn" bindtap="hideAddAddressModal">取消</button>
+      </view>
     </view>
   </view>
-</view>
 </view>
