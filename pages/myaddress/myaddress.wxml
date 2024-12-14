@@ -3,7 +3,7 @@
   <view wx:if="{{mode === 'select'}}">
     <text class="page-title">选择收货地址</text>
     <block wx:if="{{addressList.length > 0}}">
-      <view wx:for="{{addressList}}" wx:key="address_id" class="address-item" bindtap="selectAddress">
+      <view wx:for="{{addressList}}" wx:key="address_id" class="address-item" bindtap="selectAddress" data-item="{{item}}">
         <text class="address-detail">{{item.detail}}</text>
         <text class="default-label" wx:if="{{item.is_default}}">(默认地址)</text>
       </view>
@@ -16,6 +16,7 @@
       </view>
     </block>
   </view>
+
 
   <!-- 管理模式 -->
   <view wx:if="{{mode === 'manage'}}">
