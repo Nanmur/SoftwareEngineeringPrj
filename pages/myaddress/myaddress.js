@@ -26,7 +26,7 @@ Page({
     }
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/getAddresses', // 替换为ngrok地址
+      url: 'https://light-basically-fox.ngrok-free.app/getAddresses', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -60,13 +60,12 @@ Page({
     const selectedAddress = e.currentTarget.dataset.item; // 获取点击的地址对象
     const pages = getCurrentPages(); // 获取当前页面栈
     const prevPage = pages[pages.length - 2]; // 获取上一页
-
     // 通过页面栈传值，返回选中的地址
     prevPage.setData({
       address: selectedAddress.detail,
-      selectedAddressId: selectedAddress.address_id, // 你可以根据需要传递更多的信息
+      selectedAddressId: selectedAddress.address_id, 
     });
-
+    console.log(selectedAddress.address_id);
     // 返回上一页
     wx.navigateBack();
   },
@@ -106,7 +105,7 @@ Page({
     }
   
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/addAddress', // 替换为ngrok地址
+      url: 'https://light-basically-fox.ngrok-free.app/addAddress', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -140,7 +139,7 @@ Page({
     const userInfo = wx.getStorageSync('userInfo');
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/setDefaultAddress', // 替换为ngrok地址
+      url: 'https://light-basically-fox.ngrok-free.app/setDefaultAddress', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -172,7 +171,7 @@ Page({
     const userInfo = wx.getStorageSync('userInfo');
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/deleteAddress', // 替换为ngrok地址
+      url: 'https://light-basically-fox.ngrok-free.app/deleteAddress', // 替换为ngrok地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',

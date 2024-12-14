@@ -1,5 +1,5 @@
 // const request = require('../../utils/request.js');
-const baseUrl = 'https://above-cat-presumably.ngrok-free.app'; //挂载的本地端口
+const baseUrl = 'https://light-basically-fox.ngrok-free.app'; //挂载的本地端口
 
 function request(url, data, method = 'POST') {
   return new Promise((resolve, reject) => {

@@ -1,8 +1,10 @@
+const app = getApp();
 Page({
   data: {
     nicname: null, // 用户名
     phone_number: null, // 手机号
     address: '', // 默认收货地址
+    selectedAddressId:'',
     title: '', // 订单标题
     description: '', // 订单描述
     reward: '', // 报酬
@@ -37,7 +39,7 @@ Page({
 
     // 请求默认地址
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/getDefaultAddress', // 替换为你的后端地址
+      url: 'https://light-basically-fox.ngrok-free.app/getDefaultAddress', // 替换为你的后端地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -46,9 +48,12 @@ Page({
       success: (res) => {
         if (res.data.success) {
           const { detail } = res.data.data;
+          const { address_id }  = res.data.data;
           this.setData({
             address: detail,
+            selectedAddressId:address_id,
           });
+          console.log(this.data.selectedAddressId);
         } else {
           wx.showToast({
             title: res.data.message || '获取地址失败',
@@ -99,7 +104,10 @@ Page({
 
   // 提交订单
   confirmOrder: function () {
-    const { title, description, reward, timeLimit, images } = this.data;
+    console.log(this.data.selectedAddressId);
+    const { address ,selectedAddressId, title, description, reward, timeLimit, images } = this.data;
+    const user_id=app.globalData.userInfo.user_id;
+    console.log(address,selectedAddressId, title, description, reward, timeLimit, images);
 
     if (!title || !description || !reward || !timeLimit) {
       wx.showToast({
@@ -111,12 +119,15 @@ Page({
     }
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/create-order', // 替换为你的后端地址
+      url: 'https://light-basically-fox.ngrok-free.app/create-order', 
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
       },
       data: {
+        user_id,
+        address,
+        selectedAddressId,
         title,
         description,
         reward,

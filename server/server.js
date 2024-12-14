@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const query = require('./db');
 const app = express();
+const { addHoursToCurrentTime, formatDateTime } = require('../utils/datetime');
 
 app.use(bodyParser.json());
 
@@ -161,6 +162,31 @@ app.post('/deleteAddress', async (req, res) => {
     res.json({ success: true, message: 'Address deleted successfully' });
   } catch (error) {
     console.error('Error deleting address:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+// 创建订单
+app.post('/create-order', async (req, res) => {
+  const { user_id, address, selectedAddressId, title, description, reward, timeLimit, images } = req.body;
+  const status='publishing';
+  
+  if (!user_id || !address || !selectedAddressId || !title || !description || !reward || !timeLimit) {
+    return res.json({ success: false, message: 'check required information' });
+  }
+  // 如果 images 是空或未定义，设置 img_url 为 NULL
+  const imageUrl = images && images.length > 0 ? images : null;
+  const deadline = addHoursToCurrentTime(timeLimit);//发单的时候会输入接单后多少小时的时限（timelimit)，然后再发布订单，现假设我输入时限是两个小时，我想让订单未接单的时候，数据库的deadline显示的是0000-00-00 02:00:00（注意是datetime格式），然后之后有用户接单的时候，再把这个数据和用户接单时间相加，请把用到的跟格式化时间和获取时间等函数封装到datetime.js文件中，待办
+  
+  console.log(deadline);
+  try {
+    await query( 
+      'INSERT INTO orders (requester_id, target_address_id, title,description,img_url,reward,status,deadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+    [user_id,selectedAddressId,title,description,imageUrl,reward,status,deadline]
+    );
+    res.json({ success: true, message: 'create order success' });
+  } catch (error) {
+    console.error('Error creating order:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
