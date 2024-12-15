@@ -53,7 +53,7 @@ Page({
             address: detail,
             selectedAddressId:address_id,
           });
-          console.log(this.data.selectedAddressId);
+          // console.log(this.data.selectedAddressId);
         } else {
           wx.showToast({
             title: res.data.message || '获取地址失败',
