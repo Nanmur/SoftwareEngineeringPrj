@@ -1,59 +1,73 @@
-/* pages/order/order.wxss */
 .order-container {
   padding: 20px;
 }
 
-.order-item {
+/* 刷新按钮容器样式 */
+.refresh-button-container {
+  position: absolute;
+  top: 10px; /* 距离顶部 */
+  right: 10px; /* 距离右侧 */
+  z-index: 10; /* 保证按钮在最上层 */
+}
+
+/* 刷新图标样式 */
+.refresh-icon {
+  width: 30px; /* 缩小图标尺寸 */
+  height: 30px;
+}
+
+.section {
   margin-bottom: 20px;
-  padding: 15px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.section-title {
+  color: #333;
+}
+
+.toggle-icon {
+  color: #666;
+}
+
+.order-item {
+  margin-top: 10px;
+  padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #fff;
-  position: relative; /* 设置相对定位以放置右上角的状态 */
 }
 
 .order-title {
   display: flex;
   justify-content: space-between;
-  font-size: 18px;
-  position: relative;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .order-status {
-  font-size: 14px;
-  font-weight: bold;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 5px 10px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: white;
 }
+
+.order-status.publishing { background-color: gray; }
+.order-status.taked { background-color: yellow; color: black; }
+.order-status.completed { background-color: green; }
+.order-status.overtime { background-color: red; }
 
 .order-detail {
   margin-top: 10px;
   font-size: 14px;
-}
-
-.order-status.publishing {
-  color: gray;
-  background-color: lightgray;
-}
-
-.order-status.taked {
-  color: black;
-  background-color: yellow;
-}
-
-.order-status.completed {
-  color: white;
-  background-color: green;
-}
-
-.order-status.overtime {
-  color: white;
-  background-color: red;
-}
-.title {
-  font-weight:bold;
+  color: #555;
 }
