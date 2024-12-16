@@ -206,9 +206,9 @@ app.post('/getPublishingOrders', async (req, res) => {
 
 // 接单操作
 app.post('/takeOrder', async (req, res) => {
-  const { user_id, orderId } = req.body;
-  console.log(req.body);
-  if (!user_id || !orderId) {
+  const { user_id, order_id } = req.body;
+  // console.log(req.body);
+  if (!user_id || !order_id) {
     return res.json({ success: false, message: 'User ID and Order ID are required' });
   }
 
@@ -216,7 +216,7 @@ app.post('/takeOrder', async (req, res) => {
     // 获取当前订单的 timelimit（时限）
     const orderResult = await query(
       `SELECT timelimit FROM orders WHERE order_id = ? AND status = 'publishing'`,
-      [orderId]
+      [order_id]
     );
 
     if (orderResult.length === 0) {
@@ -224,16 +224,18 @@ app.post('/takeOrder', async (req, res) => {
     }
 
     const timelimit = orderResult[0].timelimit; // 获取时限
+    // console.log(timelimit);
 
     
-    const deadline = addHoursToCurrentTime(timeLimit);
+    const deadline = addHoursToCurrentTime(timelimit);
+    // console.log("deadline is:",deadline);
     // 调用 datetime.js 中的 addHoursToCurrentTime 函数，计算订单的 deadline
     // const deadline = addHoursToCurrentTime(currentTime, timelimit); // 计算截止时间
 
     // 更新订单状态为 'taked'，并设置 deadline，同时插入接单人的 user_id 到 runner_id 字段
     await query(
       `UPDATE orders SET runner_id = ?, status = 'taked', deadline = ? WHERE order_id = ? AND status = 'publishing'`,
-      [user_id, deadline, orderId]
+      [user_id, deadline, order_id]
     );
 
     res.json({ success: true, message: 'Order taken successfully' });
