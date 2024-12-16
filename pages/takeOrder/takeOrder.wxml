@@ -1,0 +1,17 @@
+<!--pages/takeOrder/takeOrder.wxml-->
+<view class="container">
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <block wx:for="{{orders}}" wx:key="order_id">
+      <view class="order-item">
+        <view class="order-details">
+          <view class="order-title">{{item.title}}</view>
+          <view class="order-description">{{item.description}}</view>
+          <view class="order-reward">报酬: ¥{{item.reward}}</view>
+          <view class="order-timelimit">时限: {{item.timelimit}} 小时</view>
+        </view>
+        <button class="take-order-button" data-order-id="{{item.order_id}}" data-index="{{index}}" bindtap="takeOrder">接单</button>
+      </view>
+    </block>
+  </view>
+</view>
