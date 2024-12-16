@@ -1,1 +1,62 @@
 /* pages/takeOrder/takeOrder.wxss */
+.container {
+  padding: 20px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-details {
+  margin-bottom: 12px;
+}
+
+.order-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.order-description {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.order-reward,
+.order-timelimit {
+  font-size: 14px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.take-order-button {
+  background-color: #1aad19;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 12px;
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+.take-order-button:hover {
+  background-color: #198b14;
+}
+
+.take-order-button:active {
+  background-color: #177c12;
+}

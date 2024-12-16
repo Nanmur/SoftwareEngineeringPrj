@@ -178,7 +178,6 @@ app.post('/create-order', async (req, res) => {
   const imageUrl = images && images.length > 0 ? images : null;
   // const deadline = addHoursToCurrentTime(timeLimit);
   //发单的时候会输入接单后多少小时的时限（timelimit)，然后再发布订单，现假设我输入时限是两个小时，我想让订单未接单的时候，数据库的deadline显示的是0000-00-00 02:00:00（注意是datetime格式），然后之后有用户接单的时候，再把这个数据和用户接单时间相加，请把用到的跟格式化时间和获取时间等函数封装到datetime.js文件中，待办
-  // console.log(deadline);
   try {
     await query( 
       'INSERT INTO orders (requester_id, target_address_id, title,description,img_url,reward,status,timelimit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
@@ -190,6 +189,60 @@ app.post('/create-order', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+
+
+// 获取所有状态为 'publishing' 的订单
+app.post('/getPublishingOrders', async (req, res) => {
+  try {
+    const result = await query(
+      `SELECT order_id, title, description, reward, timelimit FROM orders WHERE status = 'publishing'`
+    );
+    res.json({ success: true, data: result });
+  } catch (error) {
+    console.error('Error fetching publishing orders:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+// 接单操作
+app.post('/takeOrder', async (req, res) => {
+  const { user_id, orderId } = req.body;
+  console.log(req.body);
+  if (!user_id || !orderId) {
+    return res.json({ success: false, message: 'User ID and Order ID are required' });
+  }
+
+  try {
+    // 获取当前订单的 timelimit（时限）
+    const orderResult = await query(
+      `SELECT timelimit FROM orders WHERE order_id = ? AND status = 'publishing'`,
+      [orderId]
+    );
+
+    if (orderResult.length === 0) {
+      return res.json({ success: false, message: 'Order not found or already taken' });
+    }
+
+    const timelimit = orderResult[0].timelimit; // 获取时限
+
+    
+    const deadline = addHoursToCurrentTime(timeLimit);
+    // 调用 datetime.js 中的 addHoursToCurrentTime 函数，计算订单的 deadline
+    // const deadline = addHoursToCurrentTime(currentTime, timelimit); // 计算截止时间
+
+    // 更新订单状态为 'taked'，并设置 deadline，同时插入接单人的 user_id 到 runner_id 字段
+    await query(
+      `UPDATE orders SET runner_id = ?, status = 'taked', deadline = ? WHERE order_id = ? AND status = 'publishing'`,
+      [user_id, deadline, orderId]
+    );
+
+    res.json({ success: true, message: 'Order taken successfully' });
+  } catch (error) {
+    console.error('Error taking order:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 
 // 启动服务器
 const PORT = process.env.PORT || 3000;

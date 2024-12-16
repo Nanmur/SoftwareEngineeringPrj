@@ -1,66 +1,113 @@
-// pages/takeOrder/takeOrder.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    orders: [], // 订单列表
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  onLoad: function () {
+    this.getPublishingOrders();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
+  // 获取所有status为publishing的订单
+  getPublishingOrders: function () {
+    const userInfo = wx.getStorageSync('userInfo'); // 获取存储的用户信息
 
+    if (!userInfo || !userInfo.user_id) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000,
+      });
+      return;
+    }
+
+    wx.request({
+      url: 'https://light-basically-fox.ngrok-free.app/getPublishingOrders', // 替换为你的后端地址
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+      },
+      data: { userId: userInfo.user_id },
+      success: (res) => {
+        if (res.data.success) {
+          this.setData({
+            orders: res.data.data, // 更新订单列表
+          });
+        } else {
+          wx.showToast({
+            title: '获取订单失败',
+            icon: 'error',
+            duration: 2000,
+          });
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '无法连接到服务器',
+          icon: 'error',
+          duration: 2000,
+        });
+      },
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
+  // 接单处理
+  takeOrder: function (e) {
+    const orderId = e.currentTarget.dataset.orderId; // 获取订单ID
+    const index = e.currentTarget.dataset.index; // 获取订单索引
+    const userInfo = wx.getStorageSync('userInfo'); // 获取存储的用户信息
 
+    if (!userInfo || !userInfo.user_id) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error',
+        duration: 2000,
+      });
+      return;
+    }
+
+    const userId = userInfo.user_id; // 接单人ID
+    const timelimit = this.data.orders[index].timelimit; // 获取订单时限
+
+    // 发送请求到后端接单
+    wx.request({
+      url: 'https://light-basically-fox.ngrok-free.app/take-order', // 替换为你的后端地址
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        user_id: userId,
+        order_id: orderId,
+        timelimit: timelimit, // 传递时限
+      },
+      success: (res) => {
+        if (res.data.success) {
+          wx.showToast({
+            title: '接单成功',
+            icon: 'success',
+            duration: 2000,
+          });
+
+          // 更新本地订单状态
+          const updatedOrders = this.data.orders.filter(order => order.order_id !== orderId);
+          this.setData({
+            orders: updatedOrders, // 移除已接的订单
+          });
+        } else {
+          wx.showToast({
+            title: '接单失败',
+            icon: 'error',
+            duration: 2000,
+          });
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '无法连接到服务器',
+          icon: 'error',
+          duration: 2000,
+        });
+      },
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
-})
+});
