@@ -244,6 +244,28 @@ app.post('/takeOrder', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+app.post('/getOrdersByUser', async (req, res) => {
+  const { user_id } = req.body;
+  
+  try {
+    // 查询与用户相关的所有订单
+    const orders = await query(`
+      SELECT * FROM orders
+      WHERE requester_id = ? OR runner_id = ?
+    `, [user_id, user_id]);
+
+    // 返回查询结果
+    res.json({
+      success: true,
+      data: orders,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: '服务器错误，请稍后再试。',
+    });
+  }
+});
 
 
 // 启动服务器

@@ -1,1 +1,59 @@
-/* pages/order/order.wxss */
+.container {
+  padding: 20px;
+}
+
+.order-list {
+  margin-top: 20px;
+}
+
+.list-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.order-scroll {
+  max-height: 500px;
+}
+
+.order-item {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.order-status {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.order-body {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.order-description, .order-reward, .order-deadline {
+  display: block;
+  margin-top: 5px;
+}
+
+.empty-placeholder {
+  padding: 10px;
+  text-align: center;
+  color: #888;
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+}

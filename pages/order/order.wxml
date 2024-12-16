@@ -1,2 +1,43 @@
-<!--pages/order/order.wxml-->
-<text>这是订单</text>
+<view class="container">
+  <view class="order-list">
+    <text class="list-title">已发单</text>
+    <scroll-view class="order-scroll" scroll-y="true">
+      <view wx:if="{{postedOrders.length === 0}}" class="empty-placeholder">
+        <text>空</text>
+      </view>
+
+      <view wx:for="{{postedOrders}}" wx:key="order_id" class="order-item">
+        <view class="order-header">
+          <text class="order-title">{{item.title}}</text>
+          <text class="order-status" style="color: {{item.statusColor}}">{{item.statusText}}</text>
+        </view>
+        <view class="order-body">
+          <text class="order-description">描述：{{item.description}}</text>
+          <text class="order-reward">报酬：{{item.reward}} 元</text>
+          <text class="order-deadline">截止时间：{{item.deadline}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="order-list">
+    <text class="list-title">已接单</text>
+    <scroll-view class="order-scroll" scroll-y="true">
+      <view wx:if="{{receivedOrders.length === 0}}" class="empty-placeholder">
+        <text>空</text>
+      </view>
+
+      <view wx:for="{{receivedOrders}}" wx:key="order_id" class="order-item">
+        <view class="order-header">
+          <text class="order-title">{{item.title}}</text>
+          <text class="order-status" style="color: {{item.statusColor}}">{{item.statusText}}</text>
+        </view>
+        <view class="order-body">
+          <text class="order-description">描述：{{item.description}}</text>
+          <text class="order-reward">报酬：{{item.reward}} 元</text>
+          <text class="order-deadline">截止时间：{{item.deadline}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
