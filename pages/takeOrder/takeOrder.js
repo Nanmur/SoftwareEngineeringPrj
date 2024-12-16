@@ -70,7 +70,7 @@ Page({
 
     // 发送请求到后端接单
     wx.request({
-      url: 'https://light-basically-fox.ngrok-free.app/take-order', // 替换为你的后端地址
+      url: 'https://light-basically-fox.ngrok-free.app/takeOrder', // 替换为你的后端地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
