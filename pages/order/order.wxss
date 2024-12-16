@@ -1,1 +1,59 @@
 /* pages/order/order.wxss */
+.order-container {
+  padding: 20px;
+}
+
+.order-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  position: relative; /* 设置相对定位以放置右上角的状态 */
+}
+
+.order-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  position: relative;
+}
+
+.order-status {
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.order-detail {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.order-status.publishing {
+  color: gray;
+  background-color: lightgray;
+}
+
+.order-status.taked {
+  color: black;
+  background-color: yellow;
+}
+
+.order-status.completed {
+  color: white;
+  background-color: green;
+}
+
+.order-status.overtime {
+  color: white;
+  background-color: red;
+}
+.title {
+  font-weight:bold;
+}

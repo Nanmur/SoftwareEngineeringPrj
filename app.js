@@ -8,7 +8,7 @@ App({
     const userInfo = wx.getStorageSync('userInfo');
     if (userInfo) {
       this.globalData.userInfo = userInfo; // 加载到全局变量
-      console.log('User info loaded from local storage:', userInfo);
+      console.log('加载到全局变量:', userInfo);
 
       // 可选：自动跳转到主页面
       wx.switchTab({

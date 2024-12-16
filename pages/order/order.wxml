@@ -1,2 +1,19 @@
-<!--pages/order/order.wxml-->
-<text>这是订单</text>
+<!-- pages/order/order.wxml -->
+<view class="order-container">
+  <block wx:for="{{orders}}" wx:key="order_id">
+    <view class="order-item">
+      <view class="order-title">
+        <text class="title">{{item.title}}</text>
+        <!-- 右上角状态 -->
+        <text class="order-status {{item.status}}">{{text[item.status]}}</text>
+      </view>
+      <view class="order-detail">
+        <view><text>{{item.description}}</text></view>
+        <view><text>报酬: {{item.reward}}元</text></view>
+        <view><text>时限: {{item.timelimit}}小时</text></view>
+        <!-- 最晚完成时间 -->
+        <view><text>截止时间：{{item.deadline}}</text></view>
+      </view>
+    </view>
+  </block>
+</view>
