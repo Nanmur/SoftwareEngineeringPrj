@@ -13,5 +13,9 @@
         <button class="take-order-button" data-order-id="{{item.order_id}}" data-index="{{index}}" bindtap="takeOrder">接单</button>
       </view>
     </block>
+     <!-- 新增：当订单列表为空时显示提示信息 -->
+     <view wx:if="{{orders.length === 0}}" class="no-orders">
+      当前没有可以接的订单
+    </view>
   </view>
 </view>

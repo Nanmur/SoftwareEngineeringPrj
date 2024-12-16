@@ -1,10 +1,5 @@
 <view class="order-container">
 
-<!-- 刷新按钮，位于右上角 -->
-<view class="refresh-button-container">
-  <image src="/images/refresh.png" class="refresh-icon" bindtap="refreshOrders"></image>
-</view>
-
 <!-- 我的发单 -->
 <view class="section">
   <view class="section-header" bindtap="toggleRequests">

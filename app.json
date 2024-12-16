@@ -14,7 +14,8 @@
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "筋斗云Beta",
-    "navigationBarBackgroundColor": "#b81414"
+    "navigationBarBackgroundColor": "#b81414",
+    "enablePullDownRefresh": true 
   },
   "style": "v2",
   "componentFramework": "glass-easel",

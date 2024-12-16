@@ -60,3 +60,13 @@
 .take-order-button:active {
   background-color: #177c12;
 }
+
+/* pages/takeOrder/takeOrder.wxss */
+/* 现有样式保持不变 */
+
+.no-orders {
+  text-align: center;
+  color: #999;
+  font-size: 16px;
+  margin-top: 20px;
+}
