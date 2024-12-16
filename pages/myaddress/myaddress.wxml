@@ -27,8 +27,10 @@
           <text>{{item.detail}}</text>
           <text class="default-label" wx:if="{{item.is_default}}">(默认地址)</text>
         </view>
+        <view class="but-grp">
         <button class="set-default-btn" bindtap="setDefault" data-id="{{item.address_id}}">设为默认</button>
         <button class="delete-btn" bindtap="deleteAddress" data-id="{{item.address_id}}">删除</button>
+        </view>
       </view>
     </block>
     <block wx:else>
