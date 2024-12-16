@@ -9,12 +9,14 @@
     "pages/sendOrder/sendOrder",
     "pages/mine/mine",
     "pages/myaddress/myaddress",
-    "pages/takeOrder/takeOrder"
+    "pages/takeOrder/takeOrder",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "筋斗云Beta",
-    "navigationBarBackgroundColor": "#b81414"
+    "navigationBarBackgroundColor": "#b81414",
+    "enablePullDownRefresh": true 
   },
   "style": "v2",
   "componentFramework": "glass-easel",

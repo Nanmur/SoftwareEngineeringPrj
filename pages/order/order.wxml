@@ -1,43 +1,52 @@
-<view class="container">
-  <view class="order-list">
-    <text class="list-title">已发单</text>
-    <scroll-view class="order-scroll" scroll-y="true">
-      <view wx:if="{{postedOrders.length === 0}}" class="empty-placeholder">
-        <text>空</text>
-      </view>
 
-      <view wx:for="{{postedOrders}}" wx:key="order_id" class="order-item">
-        <view class="order-header">
-          <text class="order-title">{{item.title}}</text>
-          <text class="order-status" style="color: {{item.statusColor}}">{{item.statusText}}</text>
-        </view>
-        <view class="order-body">
-          <text class="order-description">描述：{{item.description}}</text>
-          <text class="order-reward">报酬：{{item.reward}} 元</text>
-          <text class="order-deadline">截止时间：{{item.deadline}}</text>
-        </view>
-      </view>
-    </scroll-view>
+<view class="order-container">
+
+<!-- 我的发单 -->
+<view class="section">
+  <view class="section-header" bindtap="toggleRequests">
+    <text class="section-title">我的发单</text>
+    <text class="toggle-icon">{{showRequests ? '▲' : '▼'}}</text>
   </view>
-
-  <view class="order-list">
-    <text class="list-title">已接单</text>
-    <scroll-view class="order-scroll" scroll-y="true">
-      <view wx:if="{{receivedOrders.length === 0}}" class="empty-placeholder">
-        <text>空</text>
-      </view>
-
-      <view wx:for="{{receivedOrders}}" wx:key="order_id" class="order-item">
-        <view class="order-header">
-          <text class="order-title">{{item.title}}</text>
-          <text class="order-status" style="color: {{item.statusColor}}">{{item.statusText}}</text>
+  <block wx:if="{{showRequests}}">
+    <block wx:for="{{myRequests}}" wx:key="order_id">
+      <view class="order-item">
+        <view class="order-title">
+          <text class="title">{{item.title}}</text>
+          <text class="order-status {{item.status}}">{{text[item.status]}}</text>
         </view>
-        <view class="order-body">
-          <text class="order-description">描述：{{item.description}}</text>
-          <text class="order-reward">报酬：{{item.reward}} 元</text>
-          <text class="order-deadline">截止时间：{{item.deadline}}</text>
+        <view class="order-detail">
+          <view><text>{{item.description}}</text></view>
+          <view><text>报酬: {{item.reward}}元</text></view>
+          <view><text>时限: {{item.timelimit}}小时</text></view>
+          <view><text>截止时间：{{item.deadlineDisplay}}</text></view>
         </view>
       </view>
-    </scroll-view>
+    </block>
+  </block>
+</view>
+
+<!-- 我的接单 -->
+<view class="section">
+  <view class="section-header" bindtap="toggleTakes">
+    <text class="section-title">我的接单</text>
+    <text class="toggle-icon">{{showTakes ? '▲' : '▼'}}</text>
   </view>
+  <block wx:if="{{showTakes}}">
+    <block wx:for="{{myTakes}}" wx:key="order_id">
+      <view class="order-item">
+        <view class="order-title">
+          <text class="title">{{item.title}}</text>
+          <text class="order-status {{item.status}}">{{text[item.status]}}</text>
+        </view>
+        <view class="order-detail">
+          <view><text>{{item.description}}</text></view>
+          <view><text>报酬: {{item.reward}}元</text></view>
+          <view><text>时限: {{item.timelimit}}小时</text></view>
+          <view><text>截止时间：{{item.deadlineDisplay}}</text></view>
+        </view>
+      </view>
+    </block>
+  </block>
+</view>
+
 </view>

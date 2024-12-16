@@ -35,7 +35,7 @@
       <input class="reward-input" placeholder="元" type="number" bindinput="onInputChange" data-field="reward" />
     </view>
     <view class="order-timer">
-      <text>设定时限</text>
+      <text>设定时限(小时)</text>
       <input class="time-limit" placeholder="接单后" type="number" bindinput="onInputChange" data-field="timeLimit" />
     </view>
     <view class="payment-method" style="height: 83rpx; display: flex; box-sizing: border-box">

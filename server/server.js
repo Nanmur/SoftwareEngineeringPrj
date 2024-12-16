@@ -207,7 +207,6 @@ app.post('/getPublishingOrders', async (req, res) => {
 // 接单操作
 app.post('/takeOrder', async (req, res) => {
   const { user_id, order_id } = req.body;
-  // console.log(req.body);
   if (!user_id || !order_id) {
     return res.json({ success: false, message: 'User ID and Order ID are required' });
   }
@@ -215,7 +214,7 @@ app.post('/takeOrder', async (req, res) => {
   try {
     // 获取当前订单的 timelimit（时限）
     const orderResult = await query(
-      `SELECT timelimit FROM orders WHERE order_id = ? AND status = 'publishing'`,
+      `SELECT timelimit,requester_id FROM orders WHERE order_id = ? AND status = 'publishing'`,
       [order_id]
     );
 
@@ -224,15 +223,20 @@ app.post('/takeOrder', async (req, res) => {
     }
 
     const timelimit = orderResult[0].timelimit; // 获取时限
-    // console.log(timelimit);
+    const requesterId = orderResult[0].requester_id; // 获取订单发布人ID
+
+    // 判断是否是自己抢自己的订单
+    if (user_id === requesterId) {
+      return res.json({ success: false, message: 'You cannot take your own order' });
+    }
 
     
     const deadline = addHoursToCurrentTime(timelimit);
     // console.log("deadline is:",deadline);
     // 调用 datetime.js 中的 addHoursToCurrentTime 函数，计算订单的 deadline
     // const deadline = addHoursToCurrentTime(currentTime, timelimit); // 计算截止时间
-
     // 更新订单状态为 'taked'，并设置 deadline，同时插入接单人的 user_id 到 runner_id 字段
+    
     await query(
       `UPDATE orders SET runner_id = ?, status = 'taked', deadline = ? WHERE order_id = ? AND status = 'publishing'`,
       [user_id, deadline, order_id]
@@ -267,6 +271,29 @@ app.post('/getOrdersByUser', async (req, res) => {
   }
 });
 
+// 获取当前用户相关的订单
+app.post('/getUserOrders', async (req, res) => {
+  const { userId } = req.body;
+
+  if (!userId) {
+    return res.json({ success: false, message: 'User ID is required' });
+  }
+
+  try {
+    // 获取所有与当前用户相关的订单
+    const orders = await query(`
+      SELECT * FROM orders
+      WHERE requester_id = ? OR runner_id = ?`, 
+      [userId, userId]
+    );
+
+    // 返回所有相关订单
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
 
 // 启动服务器
 const PORT = process.env.PORT || 3000;
