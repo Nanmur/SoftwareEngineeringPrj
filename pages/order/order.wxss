@@ -67,6 +67,7 @@
 .order-status.taked { background-color: yellow; color: black; }
 .order-status.completed { background-color: green; }
 .order-status.overtime { background-color: red; }
+.order-status.null { background-color: purple; }
 
 .order-detail {
   margin-top: 10px;

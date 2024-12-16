@@ -1,2 +1,60 @@
-<!--pages/orderDetail/orderDetail.wxml-->
-<text>pages/orderDetail/orderDetail.wxml</text>
+<view class="container" wx:if="{{order}}">
+  <!-- 标题部分 -->
+  <view class="header">
+    <text class="order-title">{{order.title}}</text>
+    <text class="order-status">{{text[order.status] || '异常状态'}}</text>
+  </view>
+
+  <!-- 订单详情卡片 -->
+  <view class="order-card">
+    <view class="detail-item">
+      <text class="label">描述：</text>
+      <text>{{order.description}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="label">报酬：</text>
+      <text>{{order.reward}} 元</text>
+    </view>
+    <view class="detail-item">
+      <text class="label">时限：</text>
+      <text>{{order.timelimit}} 小时</text>
+    </view>
+    <view class="detail-item">
+      <text class="label">截止时间：</text>
+      <text>{{order.deadline}}</text>
+    </view>
+  </view>
+
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <block wx:if="{{type === 'take'}}">
+      <view class="user-info">
+        <text class="label">发单者联系方式：</text>
+        <text>{{order.requester_phone}}</text>
+      </view>
+      <view class="button-group">
+        <button class="primary-btn" bindtap="updateStatus" data-status="completed">已送达</button>
+        <button class="secondary-btn" bindtap="updateStatus" data-status="null">任务失败</button>
+      </view>
+    </block>
+
+    <block wx:if="{{type === 'request'}}">
+      <block wx:if="{{order.status === 'taked' || order.status === 'overtime'}}">
+        <view class="user-info">
+          <text class="label">接单者信息：</text>
+          <text>ID：{{order.runner_id}}</text>
+          <text>用户名：{{order.runner_account}}</text>
+          <text>联系方式：{{order.runner_phone}}</text>
+        </view>
+        <view class="button-group">
+          <button class="primary-btn" bindtap="remindOrder">催单</button>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="user-info">
+          <text>订单尚未被接单</text>
+        </view>
+      </block>
+    </block>
+  </view>
+</view>

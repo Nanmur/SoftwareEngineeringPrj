@@ -11,7 +11,7 @@ Page({
       overtime: "已超时",
       completed: "已完成",
       taked: "进行中",
-      null: "未知状态",
+      null: "异常状态",
     },
     showRequests: true,
     showTakes: true,
@@ -99,7 +99,7 @@ Page({
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
     const seconds = date.getSeconds().toString().padStart(2, "0");
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
   },
 
   // 下拉刷新触发

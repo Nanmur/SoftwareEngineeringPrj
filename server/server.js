@@ -294,7 +294,57 @@ app.post('/getUserOrders', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+// 获取订单详情
+app.post('/getOrderDetail', async (req, res) => {
+  const { orderId } = req.body;
 
+  if (!orderId) {
+    return res.json({ success: false, message: 'Order ID is required' });
+  }
+
+  try {
+    const result = await query(`
+      SELECT 
+        o.*, 
+        r.user_id AS runner_id, r.account AS runner_account, r.phone AS runner_phone, 
+        req.user_id AS requester_id, req.phone AS requester_phone
+      FROM orders o
+      LEFT JOIN users r ON o.runner_id = r.user_id
+      LEFT JOIN users req ON o.requester_id = req.user_id
+      WHERE o.order_id = ?;
+    `, [orderId]);
+
+    if (result.length === 0) {
+      return res.json({ success: false, message: 'Order not found' });
+    }
+
+    res.json({ success: true, data: result[0] });
+  } catch (error) {
+    console.error('Error fetching order details:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+// 更新订单状态
+app.post('/updateOrderStatus', async (req, res) => {
+  const { orderId, status } = req.body;
+
+  if (!orderId || (status !== 'completed' && status !== 'null')) {
+    return res.json({ success: false, message: 'Invalid parameters' });
+  }
+
+  try {
+    await query(
+      `UPDATE orders SET status = ? WHERE order_id = ?`,
+      [status, orderId]
+    );
+
+    res.json({ success: true, message: 'Order status updated successfully' });
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
 // 启动服务器
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

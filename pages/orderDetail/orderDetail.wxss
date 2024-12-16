@@ -1,1 +1,94 @@
-/* pages/orderDetail/orderDetail.wxss */
+/* 页面整体背景 */
+.container {
+  background-color: #f8f9fa;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* 标题部分 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.order-status {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #007BFF;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* 订单详情卡片 */
+.order-card, .user-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: bold;
+  color: #555;
+}
+
+/* 用户信息卡片 */
+.user-info {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+/* 按钮样式 */
+.button-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.primary-btn {
+  background-color: #28a745;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 16px;
+}
+
+.secondary-btn {
+  background-color: #dc3545;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 16px;
+}
+
+button {
+  margin: 5px;
+  width: 45%;
+  text-align: center;
+  border: none;
+  font-weight: bold;
+}

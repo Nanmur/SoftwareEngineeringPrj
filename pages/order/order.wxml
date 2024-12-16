@@ -9,6 +9,7 @@
   </view>
   <block wx:if="{{showRequests}}">
     <block wx:for="{{myRequests}}" wx:key="order_id">
+      <navigator url="/pages/orderDetail/orderDetail?orderId={{item.order_id}}&type=request">
       <view class="order-item">
         <view class="order-title">
           <text class="title">{{item.title}}</text>
@@ -21,6 +22,7 @@
           <view><text>截止时间：{{item.deadlineDisplay}}</text></view>
         </view>
       </view>
+      </navigator>
     </block>
   </block>
 </view>
@@ -33,6 +35,7 @@
   </view>
   <block wx:if="{{showTakes}}">
     <block wx:for="{{myTakes}}" wx:key="order_id">
+      <navigator url="/pages/orderDetail/orderDetail?orderId={{item.order_id}}&type=take">
       <view class="order-item">
         <view class="order-title">
           <text class="title">{{item.title}}</text>
@@ -45,6 +48,7 @@
           <view><text>截止时间：{{item.deadlineDisplay}}</text></view>
         </view>
       </view>
+    </navigator>
     </block>
   </block>
 </view>
