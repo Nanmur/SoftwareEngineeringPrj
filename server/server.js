@@ -325,26 +325,23 @@ app.post('/getOrderDetail', async (req, res) => {
   }
 });
 
-// 更新订单状态
+// 更新订单状态为 "overtime"
 app.post('/updateOrderStatus', async (req, res) => {
   const { orderId, status } = req.body;
 
-  if (!orderId || (status !== 'completed' && status !== 'null')) {
-    return res.json({ success: false, message: 'Invalid parameters' });
+  if (!orderId || !status) {
+    return res.json({ success: false, message: '订单ID和状态是必需的' });
   }
 
   try {
-    await query(
-      `UPDATE orders SET status = ? WHERE order_id = ?`,
-      [status, orderId]
-    );
-
-    res.json({ success: true, message: 'Order status updated successfully' });
+    await query('UPDATE orders SET status = ? WHERE order_id = ?', [status, orderId]);
+    res.json({ success: true, message: '订单状态更新成功' });
   } catch (error) {
     console.error('Error updating order status:', error);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    res.status(500).json({ success: false, message: '服务器错误' });
   }
 });
+
 // 启动服务器
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

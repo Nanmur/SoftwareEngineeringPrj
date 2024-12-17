@@ -20,6 +20,25 @@ Page({
   onLoad: function () {
     this.getOrders();
   },
+  //更新订单状态到数据库
+  updateOrderStatus: function (orderId, status) {
+    wx.request({
+      url: 'https://light-basically-fox.ngrok-free.app/updateOrderStatus',
+      method: 'POST',
+      header: { 'Content-Type': 'application/json' },
+      data: { orderId, status },
+      success: (res) => {
+        if (res.data.success) {
+          console.log(`订单 ${orderId} 状态已更新为 ${status}`);
+        } else {
+          console.error(`订单 ${orderId} 状态更新失败:`, res.data.message);
+        }
+      },
+      fail: () => {
+        console.error(`订单 ${orderId} 状态更新请求失败`);
+      },
+    });
+  },
 
   // 获取订单数据
   getOrders: function () {
@@ -71,8 +90,11 @@ Page({
       // 处理超时状态
       if (order.status === "publishing") {
         order.statusDisplay = "publishing"; // 待接单
-      } else if (currentTime > new Date(order.deadline) && order.status !== "completed") {
+      } else if ( order.status!=="overtime"&& order.status!=="null"&&(currentTime > new Date(order.deadline) && order.status !== "completed")) {
         order.status = "overtime"; // 已超时
+        //api修改订单状态（将status改为overtime）
+        this.updateOrderStatus(order.order_id, "overtime");
+
       }
     });
 
