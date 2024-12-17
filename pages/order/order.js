@@ -11,6 +11,7 @@ Page({
       overtime: "已超时",
       completed: "已完成",
       taked: "进行中",
+      overtimeCompleted:'超时完成',
       null: "异常状态",
     },
     showRequests: true,
@@ -22,8 +23,9 @@ Page({
   },
   //更新订单状态到数据库
   updateOrderStatus: function (orderId, status) {
+    console.log(orderId, status);
     wx.request({
-      url: 'https://light-basically-fox.ngrok-free.app/updateOrderStatus',
+      url: 'https://above-cat-presumably.ngrok-free.app/updateOrderStatus',
       method: 'POST',
       header: { 'Content-Type': 'application/json' },
       data: { orderId, status },

@@ -2,7 +2,7 @@
   <!-- 标题部分 -->
   <view class="header">
     <text class="order-title">{{order.title}}</text>
-    <text class="order-status">{{text[order.status] || '异常状态'}}</text>
+    <text class="order-status {{order.status}}">{{text[order.status] }}</text>
   </view>
 
   <!-- 订单详情卡片 -->
@@ -33,8 +33,8 @@
         <text>{{order.requester_phone}}</text>
       </view>
       <view class="button-group">
-        <button class="primary-btn" bindtap="updateStatus" data-status="completed">已送达</button>
-        <button class="secondary-btn" bindtap="updateStatus" data-status="null">任务失败</button>
+        <button class="primary-btn" bindtap="updateStatusCompleted" data-status="completed">已送达</button>
+        <button class="secondary-btn" bindtap="updateStatusFail" data-status="null">任务失败</button>
       </view>
     </block>
 
@@ -42,9 +42,9 @@
       <block wx:if="{{order.status === 'taked' || order.status === 'overtime'}}">
         <view class="user-info">
           <text class="label">接单者信息：</text>
-          <text>ID：{{order.runner_id}}</text>
-          <text>用户名：{{order.runner_account}}</text>
-          <text>联系方式：{{order.runner_phone}}</text>
+          <view><text>ID：{{order.runner_id}}</text></view>
+          <view><text>用户名：{{order.runner_account}}</text></view>
+          <view><text>联系方式：{{order.runner_phone}}</text></view>
         </view>
         <view class="button-group">
           <button class="primary-btn" bindtap="remindOrder">催单</button>

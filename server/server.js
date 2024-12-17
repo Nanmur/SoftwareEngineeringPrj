@@ -341,6 +341,30 @@ app.post('/updateOrderStatus', async (req, res) => {
     res.status(500).json({ success: false, message: '服务器错误' });
   }
 });
+// 跑腿员更新订单状态接口
+app.post('/runnerUpdateOrderStatus', async (req, res) => {
+  const { orderId, status } = req.body;
+
+  if (!orderId || !status) {
+    return res.json({ success: false, message: 'Order ID and status are required' });
+  }
+
+  try {
+    // 检查订单是否存在
+    const orderResult = await query('SELECT status FROM orders WHERE order_id = ?', [orderId]);
+    if (orderResult.length === 0) {
+      return res.json({ success: false, message: 'Order not found' });
+    }
+
+    // 更新订单状态
+    await query('UPDATE orders SET status = ? WHERE order_id = ?', [status, orderId]);
+
+    res.json({ success: true, message: 'Order status updated successfully' });
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
 
 // 启动服务器
 const PORT = process.env.PORT || 3000;

@@ -68,6 +68,7 @@
 .order-status.completed { background-color: green; }
 .order-status.overtime { background-color: red; }
 .order-status.null { background-color: purple; }
+.order-status.overtimeCompleted{background-color: rgb(138, 0, 0)}
 
 .order-detail {
   margin-top: 10px;

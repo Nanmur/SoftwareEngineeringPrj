@@ -10,7 +10,6 @@ App({
       this.globalData.userInfo = userInfo; // 加载到全局变量
       console.log('加载到全局变量:', userInfo);
 
-      // 可选：自动跳转到主页面
       wx.switchTab({
         url: '/pages/main/main'
       });

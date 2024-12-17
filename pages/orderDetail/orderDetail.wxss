@@ -92,3 +92,9 @@ button {
   border: none;
   font-weight: bold;
 }
+.order-status.publishing { background-color: gray; }
+.order-status.taked { background-color: yellow; color: black; }
+.order-status.completed { background-color: green; }
+.order-status.overtime { background-color: red; }
+.order-status.null { background-color: purple; }
+.order-status.overtimeCompleted{background-color: rgb(138, 0, 0)}
