@@ -24,7 +24,7 @@ Page({
   // 获取订单详情
   getOrderDetail: function () {
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/getOrderDetail',
+      url: 'https://light-basically-fox.ngrok-free.app/getOrderDetail',
       method: 'POST',
       header: { 'Content-Type': 'application/json' },
       data: { orderId: this.data.orderId },
@@ -65,7 +65,7 @@ Page({
     // 调用 API 更新订单状态
     runnerUpdateOrderStatus: function (status) {
       wx.request({
-        url: 'https://above-cat-presumably.ngrok-free.app/runnerUpdateOrderStatus',
+        url: 'https://light-basically-fox.ngrok-free.app/runnerUpdateOrderStatus',
         method: 'POST',
         header: { 'Content-Type': 'application/json' },
         data: { orderId: this.data.orderId, status },

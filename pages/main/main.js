@@ -9,16 +9,13 @@ Page({
     creditScore:60,
     swiperImage:[
       {
-        imageUrl:'https://img.picui.cn/free/2024/10/28/671f3229aa813.png'
+        imageUrl:'/images/swiper01.png'
       },
       {
-        imageUrl:'https://img.picui.cn/free/2024/10/28/671f33dc71601.jpg'
+        imageUrl:'/images/swiper02.png'
       },
       {
-        imageUrl:'https://img.picui.cn/free/2024/10/28/671f3431e9c48.png'
-      },
-      {
-        imageUrl:'https://img.picui.cn/free/2024/10/28/671f34351685b.png'
+        imageUrl:'/images/swiper03.png'
       }
     ],
     name:""

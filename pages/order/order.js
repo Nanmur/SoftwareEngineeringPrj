@@ -25,7 +25,7 @@ Page({
   updateOrderStatus: function (orderId, status) {
     console.log(orderId, status);
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/updateOrderStatus',
+      url: 'https://light-basically-fox.ngrok-free.app/updateOrderStatus',
       method: 'POST',
       header: { 'Content-Type': 'application/json' },
       data: { orderId, status },
@@ -47,7 +47,7 @@ Page({
     const userId = app.globalData.userInfo.user_id;
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/getUserOrders',
+      url: 'https://light-basically-fox.ngrok-free.app/getUserOrders',
       method: 'POST',
       header: { 'Content-Type': 'application/json' },
       data: { userId },

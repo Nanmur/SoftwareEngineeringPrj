@@ -39,7 +39,7 @@ Page({
 
     // 请求默认地址
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/getDefaultAddress', // 替换为你的后端地址
+      url: 'https://light-basically-fox.ngrok-free.app/getDefaultAddress', // 替换为你的后端地址
       method: 'POST',
       header: {
         'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ Page({
     }
 
     wx.request({
-      url: 'https://above-cat-presumably.ngrok-free.app/create-order', 
+      url: 'https://light-basically-fox.ngrok-free.app/create-order', 
       method: 'POST',
       header: {
         'Content-Type': 'application/json',

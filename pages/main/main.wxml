@@ -33,12 +33,12 @@
 
 <view class="DirectionBox">
   <view class="toSendOrder" bindtap="navigateToSendOrder">
-    <image class="backgroundImage" src="/images/send-order-bg.jpg" mode="aspectFill"/>
+    <image class="backgroundImage" src="/images/send-order-bg.png" mode="aspectFill"/>
     <text class="title">发一单</text>
   </view>
 
   <view class="toTakeOrder" bindtap="navigateToTakeOrder">
-    <image class="backgroundImage" src="/images/take-order-bg.jpg" mode="aspectFill"/>
+    <image class="backgroundImage" src="/images/take-order-bg.png" mode="aspectFill"/>
     <text class="title">接一单</text>
   </view>
 </view>
